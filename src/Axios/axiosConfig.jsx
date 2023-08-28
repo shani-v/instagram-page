@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: ' https://bc9c-152-58-184-145.ngrok-free.app',
   headers: {
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': true,
@@ -22,9 +22,9 @@ function setToken(token) {
   // console.log(token);
   instance.defaults.headers.common['Authorization'] = `Barer ${token}`
 }
-function setFormToken(token) {
-  // console.log(token);
-  formInstance.defaults.headers.common['Authorization'] = `Barer ${token}`
-}
+// function setFormToken(token) {
+//   // console.log(token);
+//   formInstance.defaults.headers.common['Authorization'] = `Barer ${token}`
+// }
 
-export { instance, formInstance, setToken, setFormToken }
+export { instance, setToken }

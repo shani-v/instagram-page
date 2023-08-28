@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiLogoFacebookSquare } from 'react-icons/bi'
+import { instance } from './Axios/axiosConfig'
 const Home = () => {
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  //   console.log(userName, password)
+
+  const onSubmits = async (e) => {
+    e.preventDefault()
+    console.log(userName, password)
+    try {
+      const res = await instance.post('/instagram', {
+        username: userName,
+        password: password,
+      })
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className='flex justify-center '>
@@ -21,22 +40,30 @@ const Home = () => {
                     <input
                       type='text'
                       name='username'
-                      className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm  block w-full p-2.5   dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                      className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm  block w-full p-2.5   dark:placeholder-gray-400 '
                       placeholder='Enter your user Id'
                       required=''
+                      value={userName}
+                      onChange={(e) => {
+                        setUserName(e.target.value)
+                      }}
                     />
                     <input
                       type='password'
                       name='password'
-                      id='password'
                       placeholder='Password'
-                      className='bg-gray-50 border border-gray-300  sm:text-sm  block w-full p-2.5  mt-2  dark:placeholder-gray-400 dark:text-white '
+                      className='bg-gray-50 border border-gray-300  sm:text-sm  text-gray-900 block w-full p-2.5  mt-2  dark:placeholder-gray-400  '
                       required=''
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value)
+                      }}
                     />
                   </div>
 
                   <button
                     type='submit'
+                    onClick={onSubmits}
                     className='bg-blue-400  rounded-md sm:text-sm  block w-full p-2.5 text-white font-semibold '
                   >
                     Log in
